@@ -14,7 +14,7 @@
   "components": {
     "schemas": {
       "Contest": {
-        "type":"object",
+        "type": "object",
         "required": [
           "name"
         ],
@@ -201,7 +201,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           }
         },
         "operationId": "delete-contest",
@@ -317,7 +325,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           }
         },
         "operationId": "delete-contestants-contestant",
@@ -436,7 +452,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           }
         },
         "operationId": "delete-prize",

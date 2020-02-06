@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "160a96d491614382517170656aea9e25",
+    "content-hash": "01f02c447bf489f07106d24eee5dc1de",
     "packages": [
         {
             "name": "cebe/php-openapi",
@@ -1085,6 +1085,46 @@
                 "validation"
             ],
             "time": "2020-01-22T14:01:54+00:00"
+        },
+        {
+            "name": "mmal/openapi-validator",
+            "version": "0.9.9",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/mmalawski/openapi-validator.git",
+                "reference": "e863e883de8f3143b7fc6f180bc711536c130161"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/mmalawski%2Fopenapi-validator/repository/archive.zip?sha=e863e883de8f3143b7fc6f180bc711536c130161",
+                "reference": "e863e883de8f3143b7fc6f180bc711536c130161",
+                "shasum": ""
+            },
+            "require": {
+                "justinrainbow/json-schema": "^5.2",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "phpunit/phpunit": "^6.5",
+                "symfony/yaml": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mmal\\OpenapiValidator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Validates data against provide openapi spec",
+            "keywords": [
+                "openapi",
+                "swagger"
+            ],
+            "time": "2019-05-08T09:57:16+00:00"
         },
         {
             "name": "monolog/monolog",

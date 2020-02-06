@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Integration\ValidatesWithOpenApi;
 use Tests\TestCase;
 
 class ContestTest extends TestCase
 {
     use DatabaseTransactions;
+
+    use ValidatesWithOpenApi;
 
     public function testCanCreateContest()
     {
@@ -27,10 +30,7 @@ class ContestTest extends TestCase
             'contests',
             ['name' => $body['name']]
         );
-    }
 
-    public function assertValidSchema($path, $operation, $response)
-    {
-        $this->assertTrue(true);
+        $this->assertValidSchema('contests', 'POST', $response);
     }
 }
