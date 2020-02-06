@@ -2,6 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Contest;
+use App\Contestant;
+use App\Prize;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
