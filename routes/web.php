@@ -17,3 +17,4 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/spec', 'HomeController@spec')->name('spec');
 
 Route::get('/contests/{contest}', 'ContestController@show')->name('contest.show');
+Route::post('/contests', 'ContestController@create')->name('contest.create');

@@ -8,7 +8,7 @@ class Contest extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id', 'name'];
 
     public function user()
     {

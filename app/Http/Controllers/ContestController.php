@@ -22,9 +22,16 @@ class ContestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $contest = Contest::create(
+            [
+                'user_id' => \Auth::user()->id,
+                'name' => $request->input('name'),
+            ]
+        );
+
+        return response()->json($contest, 201);
     }
 
     /**
