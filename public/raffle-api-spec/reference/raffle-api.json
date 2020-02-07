@@ -46,6 +46,27 @@
             }
           }
         }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {"type": "string"},
+                      {"type": "object"}
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -91,14 +112,10 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contest"
-                }
-              }
-            }
+            "$ref": "#/components/responses/422"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           }
         },
         "description": "Create a new contest",

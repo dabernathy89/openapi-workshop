@@ -10,12 +10,14 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "hkarlstrom/openapi-validation-middleware": "^0.3.15",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "league/openapi-psr7-validator": "^0.7.0",
         "mmal/openapi-validator": "^0.9.9",
         "nyholm/psr7": "^1.2",
-        "symfony/psr-http-message-bridge": "^2.0"
+        "softonic/laravel-psr15-bridge": "^1.1",
+        "symfony/psr-http-message-bridge": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

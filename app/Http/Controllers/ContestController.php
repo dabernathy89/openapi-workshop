@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contest;
 use Illuminate\Http\Request;
+use Auth;
 
 class ContestController extends Controller
 {
@@ -26,7 +27,7 @@ class ContestController extends Controller
     {
         $contest = Contest::create(
             [
-                'user_id' => \Auth::user()->id,
+                'user_id' => Auth::user()->id,
                 'name' => $request->input('name'),
             ]
         );

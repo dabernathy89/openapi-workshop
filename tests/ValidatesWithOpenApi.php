@@ -49,7 +49,11 @@ trait ValidatesWithOpenApi
                 || $e->getPrevious() instanceof TypeMismatch
             ) {
                 $message .= "\nKeyword: " . $e->getPrevious()->keyword();
-                $message .= "\nData: " . $e->getPrevious()->data();
+                $data = $e->getPrevious()->data();
+                if (is_array($data)) {
+                    $data = json_encode($data);
+                }
+                $message .= "\nData: " . $data;
             }
         }
 
