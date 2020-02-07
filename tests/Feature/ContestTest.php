@@ -31,6 +31,12 @@ class ContestTest extends TestCase
             ['name' => $body['name']]
         );
 
-        $this->assertValidSchema('contests', 'POST', $response);
+        [$success, $message] = $this->validateWithOpenApi(
+            '/contests',
+            'POST',
+            $response
+        );
+
+        $this->assertTrue($success, $message);
     }
 }

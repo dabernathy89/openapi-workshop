@@ -2,32 +2,67 @@
 
 namespace Tests\Integration;
 
-use File;
-use Mmal\OpenapiValidator\Validator;
+use Illuminate\Foundation\Testing\TestResponse;
+use League\OpenAPIValidation\PSR7\Exception\Validation\InvalidBody;
+use League\OpenAPIValidation\PSR7\OperationAddress;
+use League\OpenAPIValidation\PSR7\ValidatorBuilder;
+use League\OpenAPIValidation\Schema\Exception\KeywordMismatch;
+use League\OpenAPIValidation\Schema\Exception\TypeMismatch;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
 trait ValidatesWithOpenApi
 {
-    protected $openApiValidator;
+    protected $validator;
 
     protected function initValidator()
     {
-        if (! $this->openApiValidator) {
+        if (! $this->validator) {
             $spec_path = base_path('public/raffle-api-spec/reference/raffle-api.json');
-            $this->openApiValidator = new Validator(json_decode(File::get($spec_path), true));
+            $this->validator = (new ValidatorBuilder)
+                ->fromJsonFile($spec_path)
+                ->getResponseValidator();
         }
     }
 
-    protected function assertValidSchema($path, $method, $response)
+    protected function validateWithOpenApi($path, $method, TestResponse $response)
     {
         $this->initValidator();
+        $response = $this->convertResponse($response);
 
-        $result = $this->openApiValidator->validateBasedOnRequest(
-            $path,
-            $method,
-            $response->getStatusCode(),
-            $response->getData(true)
+        $operation = new OperationAddress($path, strtolower($method));
+
+        try {
+            $this->validator->validate($operation, $response);
+            $success = true;
+            $message = '';
+        } catch (\Exception $e) {
+            $success = false;
+            $message = $e->getMessage();
+
+            if ($e instanceof InvalidBody) {
+                $message = $e->getPrevious()->getMessage();
+            }
+
+            if ($e->getPrevious() instanceof KeywordMismatch
+                || $e->getPrevious() instanceof TypeMismatch
+            ) {
+                $message .= "\nKeyword: " . $e->getPrevious()->keyword();
+                $message .= "\nData: " . $e->getPrevious()->data();
+            }
+        }
+
+        return [$success, $message];
+    }
+
+    protected function convertResponse(TestResponse $response) : ResponseInterface
+    {
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory(
+            $psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory
         );
 
-        $this->assertFalse($result->hasErrors(), $result);
+        return $psrHttpFactory->createResponse($response->baseResponse);
     }
 }
