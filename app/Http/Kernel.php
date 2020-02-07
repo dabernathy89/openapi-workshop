@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use HKarlstrom\Middleware\OpenApiValidation;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
