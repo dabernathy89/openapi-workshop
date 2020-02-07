@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
-        "hkarlstrom/openapi-validation-middleware": "^0.3.15",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "league/openapi-psr7-validator": "^0.7.0",
